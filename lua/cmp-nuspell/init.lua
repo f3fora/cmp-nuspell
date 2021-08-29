@@ -19,17 +19,26 @@ function source:get_keyword_pattern()
     return [[\w\+]]
 end
 
-local function candidates(entries)
+local function candidates(suggestions, word)
     local items = {}
-    for k, v in ipairs(entries) do
-        items[k] = { label = v }
+    local i = 0
+    if word then
+        items[1] = word
+        i = 1
+    end
+    for k, v in ipairs(suggestions) do
+        items[k + i] = { label = v }
     end
     return items
 end
 
 function source:complete(request, callback)
     local input = string.sub(request.context.cursor_before_line, request.offset)
-    callback({ items = candidates(self.dict:suggest(input)), isIncomplete = true })
+    local word
+    if self.dict:spell(input) then
+        word = input
+    end
+    callback({ items = candidates(self.dict:suggest(input, word)), isIncomplete = true })
 end
 
 return source
