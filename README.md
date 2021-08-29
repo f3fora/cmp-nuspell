@@ -4,7 +4,11 @@
 
 ## Status
 
-WIP. Feedback wanted also for [lua-nuspell](https://github.com/f3fora/lua-nuspell)
+WIP. Feedback wanted for [lua-nuspell](https://github.com/f3fora/lua-nuspell)
+
+Support only `en_US` dictionary.
+
+First test for integrating `nuspell` and hunspell dictionary into neovim.
 
 ## Setup
 
@@ -23,6 +27,7 @@ use {
     'f3fora/cmp-nuspell',
     rocks={'lua-nuspell'}
 }
+```
 
 ## Checking existance of hunspell dictionary
 
