@@ -1,16 +1,20 @@
 local nuspell = require('nuspell')
 local source = {}
 
-local lang = 'en_US'
-local dirs = nuspell.search_default_dirs_for_dicts()
-local path = nuspell.find_dictionary(dirs, lang)
+function source.new(lang)
+    if lang == nil then
+        lang = 'en_US'
+    end
+    local dirs = nuspell.search_default_dirs_for_dicts()
+    local path = nuspell.find_dictionary(dirs, lang)
 
-function source.new()
     local self = setmetatable({}, { __index = source })
     self.available = false
     if path then
         self.dict = nuspell.Dictionary.load_from_path(path)
         self.available = true
+    else
+        vim.cmd('echoerr "no dictionary found for language ' .. lang .. '"')
     end
     return self
 end
