@@ -6,13 +6,13 @@
 
 WIP. Feedback wanted for [lua-nuspell](https://github.com/f3fora/lua-nuspell)
 
-Support only `en_US` dictionary.
-
 First test for integrating `nuspell` and hunspell dictionary into neovim.
 
 ## Setup
 
 ```lua
+vim.g.cmp_nuspell_lang = 'en_CA' -- optional, defaults to en_US
+
 require('cmp').setup {
   sources = {
     { name = 'nuspell' }
